@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  contosouniversity:
+    image: ${DOCKER_REGISTRY-}contosouniversity
+    build:
+      context: .
+      dockerfile: ContosoUniversity/Dockerfile
+
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+
