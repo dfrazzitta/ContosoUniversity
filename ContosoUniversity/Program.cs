@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;
 
+
+
+ 
+
+
 namespace ContosoUniversity
 {
     public class Program
@@ -16,12 +21,21 @@ namespace ContosoUniversity
 
             // Add services to the container.
             // var connectionString = builder.Configuration.GetConnectionString("defaultconn") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+ 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddDbContext<SchoolContext>(options =>
                              options.UseSqlServer(builder.Configuration.GetConnectionString("defaultconn")));
+/*
 
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionX")));
+
+            builder.Services.AddDbContext<SchoolContext>(options =>
+                             options.UseSqlServer(builder.Configuration.GetConnectionString("defaultconnX")));
+ */
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -29,7 +43,7 @@ namespace ContosoUniversity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddRazorPages();
-
+            builder.Services.AddSingleton<MetricReporter>();
 
             builder.Services.AddMiniProfiler(options =>
             {
@@ -52,7 +66,8 @@ namespace ContosoUniversity
                 app.UseHsts();
             }
 
-            app.UseMetricServer(5000, "/metrics");
+            app.UseMetricServer("/metrics");
+            app.UseMiddleware<ResponseMetricMiddleware>();
 
             using (var scope = app.Services.CreateScope())
             {
@@ -64,6 +79,19 @@ namespace ContosoUniversity
 
                 DbInitializer.Initialize(context);
             }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<ApplicationDbContext>();
+
+                context.Database.Migrate();
+
+               // DbInitializer.Initialize(context);
+            }
+
+
             app.UseMiniProfiler();
 
 
@@ -77,6 +105,7 @@ namespace ContosoUniversity
 
             app.MapRazorPages();
 
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.Run();
         }
     }

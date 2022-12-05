@@ -1,0 +1,52 @@
+﻿@page
+@model ContosoUniversity.Pages.TestMe.IndexModel
+@{
+}
+
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h2>Students</h2>
+
+ 
+
+<table class="table">
+    <thead>
+        <tr>
+             
+            <th>
+                <h2>NameSpace</h2>     @* @Html.DisplayNameFor(model => model.Students[0].LastName) *@
+            </th>
+            <th>
+                <h2>Pods</h2> @*  @Html.DisplayNameFor(model => model.Students[0].FirstMidName) *@
+            </th>
+            <th>
+                <h2>Logs</h2>    @* @Html.DisplayNameFor(model => model.Students[0].EnrollmentDate)  *@
+                 
+            </th>
+             
+            <th></th>
+              
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.podInfoPage)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameSpace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ControllerName)
+                </td>
+ 
+                <td>
+                     
+                    <a asp-page="./Details" asp-route-id="@item.ControllerName">Details</a>  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

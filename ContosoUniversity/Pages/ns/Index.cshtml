@@ -1,0 +1,50 @@
+﻿@page
+@model ContosoUniversity.Pages.ns.IndexModel
+@{
+}
+
+
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="co-3">
+            <h2 class="text-primary">NameSpace List</h2>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+
+    <br /><br />
+
+</div>
+<table class="table">
+ 
+    <thead>
+        <tr>
+            <th>Create TS</th>
+            <th>Finalizers</th>
+            <th>Labels</th>
+            <th>Name</th>
+            <th>Resource Ver Ct</th>
+            <th>UID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.pd)
+        {
+            <tr>
+                <td>@obj.Metadata.CreationTimestamp</td>
+                <td>@obj.Spec.Finalizers.Count</td>
+                <td>@obj.Metadata.Labels.ToList().FirstOrDefault()</td>
+                <td>@obj.Metadata.Name</td>
+                <td>@obj.Metadata.ResourceVersion</td>
+                <td>@obj.Metadata.Uid</td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

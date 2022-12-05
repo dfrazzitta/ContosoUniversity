@@ -1,0 +1,48 @@
+﻿@page
+@model ContosoUniversity.Pages.kservice.IndexModel
+@{
+}
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="co-3">
+            <h2 class="text-primary">NameSpace List</h2>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+
+    <br /><br />
+
+</div>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Create TS</th>
+            <th>Finalizers</th>
+            <th>Labels</th>
+            <th>Name</th>
+            <th>Resource Ver Ct</th>
+            <th>UID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.pd)
+        {
+            <tr>
+                <td>@obj.Metadata.CreationTimestamp</td>
+                <td>@obj.Spec.ClusterIP</td>
+                <td>@obj.Spec.ExternalTrafficPolicy</td>
+                <td>@obj.Spec.ExternalName</td>
+                <td>@obj.Metadata.Name</td>
+                <td>@obj.Spec.SessionAffinity</td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

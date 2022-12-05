@@ -1,0 +1,58 @@
+﻿@page
+@model ContosoUniversity.Pages.Pod.IndexModel
+ 
+ 
+@{
+    var podView = Model.pd.ToList();
+}
+ 
+ 
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="co-3">
+            <h2 class="text-primary">Pod List</h2>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+
+<br /><br />
+
+</div>
+<table class="table">
+    <caption>Basic Table Layout</caption>
+    <thead>
+        <tr>
+            <th>Node Name</th>
+            <th>Container Ct</th>
+            <th>Pod IP</th>
+            <th>Name</th>
+            <th>Tolerations Ct</th>
+            <th>SA</th>
+ 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.pd)
+        {
+            <tr>
+                <td>@obj.Spec.NodeName</td>
+                <td>@obj.Spec.Containers.Count</td>
+                <td>@obj.Status.PodIP</td>
+                <td>@obj.Metadata.Name</td>
+                <td>@obj.Status.Message</td>
+             @*   <td><form action="/logs" ><input type=submit value="@obj.Spec.ServiceAccountName" title="@obj.Spec.ServiceAccountName" style="width:100%"></form></td>
+                 *@
+                <td>@obj.Spec.ServiceAccountName</td>  
+            </tr>
+ 
+        }
+
+    </tbody>
+    
+</table>
+
+ 
