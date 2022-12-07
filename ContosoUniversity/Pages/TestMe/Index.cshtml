@@ -10,7 +10,7 @@
 
 <h2>Students</h2>
 
- 
+<a asp-page="./Index">Back to List</a>
 
 <table class="table">
     <thead>
@@ -41,12 +41,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ControllerName)
                 </td>
- 
+  
                 <td>
-                     
-                    <a asp-page="./Details" asp-route-id="@item.ControllerName">Details</a>  
+
+                    <a asp-page="./Details" asp-route-id="@item.ControllerName" asp-route-namespace="@item.NameSpace">Details</a>
                 </td>
+ 
             </tr>
         }
     </tbody>
 </table>
+

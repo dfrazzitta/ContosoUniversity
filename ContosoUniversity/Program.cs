@@ -1,5 +1,7 @@
 using ContosoUniversity.Data;
+using k8s;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;
 
@@ -50,6 +52,11 @@ namespace ContosoUniversity
                 options.PopupRenderPosition = StackExchange.Profiling.RenderPosition.BottomLeft;
                 options.PopupShowTimeWithChildren = true;
             }).AddEntityFramework();
+
+            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+            builder.Services.AddSingleton<IKubernetes>(_ => new Kubernetes(config));
+
+
 
 
             var app = builder.Build();
@@ -104,7 +111,7 @@ namespace ContosoUniversity
             app.UseAuthorization();
 
             app.MapRazorPages();
-
+ 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.Run();
         }
