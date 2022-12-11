@@ -1,11 +1,12 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Pages.Students;
-
+[Authorize]
 public class DeleteModel : PageModel
 {
     private readonly SchoolContext _context;

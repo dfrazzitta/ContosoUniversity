@@ -12,7 +12,11 @@ namespace ContosoUniversity.Pages.ns
 
         public void OnGet()
         {
+#if _docker
+            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"/app/config"); //@"G:\k8slatest\csharp\examples\labels\config");
+#else        
             var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#endif//  var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
             IKubernetes client = new Kubernetes(config);
           
 

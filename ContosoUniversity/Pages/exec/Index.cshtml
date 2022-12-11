@@ -1,0 +1,48 @@
+﻿@page
+@model ContosoUniversity.Pages.exec.IndexModel
+@{
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<h1>test exec</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="co-3">
+            <h2 class="text-primary">Exec Result of nslookup</h2>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+
+    <br /><br />
+
+</div>
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>Message</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.nslookup)
+        {
+            var pp = obj.nslookupresult;
+            <tr>
+                <td>@obj.nslookupresult</td>
+            
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace WebApi.Controllers
 {
@@ -28,6 +29,27 @@ namespace WebApi.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+
+        [HttpGet(Name = "GetStudents")]
+        public string GetStudents()
+        {
+            List<Student> ls = new List<Student>();
+
+            for (int y = 0; y < 20; y++)
+            {
+                Student st = new Student();
+               // st.FullName = "dave" + y.ToString();
+                st.LastName = "fraz" + y.ToString();
+                st.EnrollmentDate = DateTime.Now;
+                st.FirstMidName = "bulls" + y.ToString();
+                
+
+                ls.Add(st);
+            }
+            var json = JsonSerializer.Serialize(ls);
+            return json;
         }
     }
 }

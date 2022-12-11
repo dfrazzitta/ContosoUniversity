@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Models;
+﻿using Bogus;
+using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Data;
 
@@ -6,11 +7,38 @@ public static class DbInitializer
 {
     public static void Initialize(SchoolContext context)
     {
+        List<Student> students = new List<Student>();
+/*
+        for (int y = 0; y <= 1000; y++)
+        {
+            int seed = (int)DateTime.Now.Ticks;
+            int days = seed % 90;
+            string jj = DateTime.Now.AddDays(days).ToString("MM/dd/yyyy");
+            var faker = new Faker<Student>()
+            .RuleFor(u => u.FirstMidName, f => f.Name.FullName())
+            .RuleFor(u => u.LastName, f => f.Name.LastName())
+            .RuleFor(u => u.EnrollmentDate, f => f.Date.Between(
+                    new DateTime(2022, 1, 1), new DateTime(2025, 1, 1)));
+            students.Add(faker.)
+        }
+*/
+
         // Look for any students.
         if (context.Students.Any())
         {
             return;   // DB has been seeded
         }
+               
+ 
+ /* 
+
+             var faker = new Faker<Student>()
+                 .RuleFor(u => u.FirstMidName, f => f.Name.FullName())
+                 .RuleFor(u => u.LastName, f => f.Name.LastName())
+                 .RuleFor(u => u.EnrollmentDate, )
+      */
+
+
 
         var alexander = new Student
         {

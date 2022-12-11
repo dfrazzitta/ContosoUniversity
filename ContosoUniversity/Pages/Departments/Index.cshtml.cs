@@ -1,10 +1,11 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Pages.Departments;
-
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly SchoolContext _context;

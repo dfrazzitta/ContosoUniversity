@@ -53,7 +53,12 @@ namespace ContosoUniversity
                 options.PopupShowTimeWithChildren = true;
             }).AddEntityFramework();
 
-            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#if _docker
+        var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"/app/config"); //@"G:\k8slatest\csharp\examples\labels\config");
+#else        
+        var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#endif
+
             builder.Services.AddSingleton<IKubernetes>(_ => new Kubernetes(config));
 
 
@@ -113,6 +118,13 @@ namespace ContosoUniversity
             app.MapRazorPages();
  
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.Run();
         }
     }

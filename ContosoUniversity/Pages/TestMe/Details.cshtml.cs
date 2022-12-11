@@ -11,14 +11,19 @@ namespace ContosoUniversity.Pages.TestMe
         public List<string> lines1 = new List<string>();
         public string _content = null;
         public string[] blow = new string[30];
+        public string LogItem { get; set; }
         public async Task OnGet(string id, string NameSpace)
         {
             var lines = new List<string>();
             var started = new ManualResetEvent(false);
-
-
+            LogItem = id;
             //  var config = KubernetesClientConfiguration.BuildConfigFromConfigFile("/config");
-            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#if _docker
+            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"/app/config"); //@"G:\k8slatest\csharp\examples\labels\config");
+#else        
+        var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#endif
+           // var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
             IKubernetes client = new Kubernetes(config);
             Console.WriteLine("Starting Request!");
 

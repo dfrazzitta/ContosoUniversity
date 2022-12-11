@@ -1,10 +1,11 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models.SchoolViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Pages;
-
+[Authorize]
 public class AboutModel : PageModel
 {
     private readonly SchoolContext _context;

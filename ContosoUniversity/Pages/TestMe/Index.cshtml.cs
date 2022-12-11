@@ -11,6 +11,7 @@ namespace ContosoUniversity.Pages.TestMe
     public class IndexModel : PageModel
     {
         List<PodInfo> pinfo = new List<PodInfo>();
+        public string LogItem { get; set; } 
         public IEnumerable<V1Pod> pd { get; set; }
         public V1PodList pd1;
         public PaginatedListPod<PodInfo> podInfoPage { get; set; }
@@ -26,7 +27,12 @@ namespace ContosoUniversity.Pages.TestMe
 
         public void OnGet(int? pageIndex, string CurrentFilter)
         {
+            //  var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#if _docker
+            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"/app/config"); //@"G:\k8slatest\csharp\examples\labels\config");
+#else        
             var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#endif
             IKubernetes client = new Kubernetes(config);
             Console.WriteLine("Starting Request!");
 

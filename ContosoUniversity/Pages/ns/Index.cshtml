@@ -5,8 +5,9 @@
 
 
 
-
-
+<br />
+<br />
+@*
 <div class="container p-3">
     <div class="row pt-4">
         <div class="co-3">
@@ -19,19 +20,21 @@
     <br /><br />
 
 </div>
-<table class="table">
- 
+*@
+<table class="table table-striped">
+    <caption>NameSpace List</caption>
     <thead>
         <tr>
             <th>Create TS</th>
-            <th>Finalizers</th>
+            <th># Finalizers</th>
             <th>Labels</th>
-            <th>Name</th>
-            <th>Resource Ver Ct</th>
+            <th>NameSpace</th>
+            <th>Resource Ver</th>
             <th>UID</th>
         </tr>
     </thead>
     <tbody>
+
         @foreach (var obj in Model.pd)
         {
             <tr>

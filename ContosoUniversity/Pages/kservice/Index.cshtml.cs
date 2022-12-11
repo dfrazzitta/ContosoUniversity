@@ -11,7 +11,12 @@ namespace ContosoUniversity.Pages.kservice
         public V1ServiceList pd1;
         public void OnGet()
         {
+            //var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#if _docker
+            var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"/app/config"); //@"G:\k8slatest\csharp\examples\labels\config");
+#else        
             var config = KubernetesClientConfiguration.BuildConfigFromConfigFile(@"G:\k8slatest\csharp\examples\labels\config");
+#endif
             IKubernetes client = new Kubernetes(config);
             Console.WriteLine("Starting Request!");
 

@@ -6,18 +6,24 @@
     ViewData["Title"] = "Students";
 }
 
-<h2>Students</h2>
+<h2>Logs for @Model.LogItem</h2>
 
-<a asp-page="./Index">Back to List</a>
+<a asp-page="./testme/Index">Back to List</a>
 
 @{
-
-    for(int i=0; i<Model.blow.Length; i++)
+    int len = Model.blow.Length;
+    if (len != 0)
     {
-        string j = Model.blow[i];
- 
-            <h4>@j</h4>
+        for (int i = 0; i < Model.blow.Length; i++)
+        {
+            string j = @Model.blow[i];
 
+            <h4>@j</h4>
+        }
+    }
+    else
+    {
+        <h4>No Logs found</h4>
     }
 }
  

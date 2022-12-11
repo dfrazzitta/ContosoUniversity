@@ -1,11 +1,12 @@
 ﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using ContosoUniversity.Models.SchoolViewModels;  // Add VM
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Pages.Instructors;
-
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly SchoolContext _context;

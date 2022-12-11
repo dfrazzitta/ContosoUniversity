@@ -3,10 +3,11 @@ using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace ContosoUniversity.Pages.Students;
 
-[Authorize]
+//[Authorize]
 public class IndexModel : PageModel
 {
     private readonly SchoolContext _context;
@@ -28,6 +29,7 @@ public class IndexModel : PageModel
     public async Task OnGetAsync(string sortOrder,
         string currentFilter, string searchString, int? pageIndex)
     {
+        List<Student> students1 = new List<Student>(); //
         CurrentSort = sortOrder;
         NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
         DateSort = sortOrder == "Date" ? "date_desc" : "Date";
@@ -65,6 +67,8 @@ public class IndexModel : PageModel
                 break;
         }
 
+        students1 = studentsIQ.ToList();
+        var json = JsonSerializer.Serialize(students1);
         var pageSize = Configuration.GetValue("PageSize", 4);
         Students = await PaginatedList<Student>.CreateAsync(
             studentsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);

@@ -8,8 +8,8 @@ services:
       dockerfile: ContosoUniversity/Dockerfile
     depends_on:
       - sqldata
-    ports:
-      - "80:80"
+#    ports:
+#      - "80:80"
 
 
 
@@ -18,8 +18,8 @@ services:
     build:
       context: .
       dockerfile: WebApi/Dockerfile
-    ports:
-      - "81:80"
+#    ports:
+#      - "81:80"
     depends_on:
       - sqldata
 
@@ -34,6 +34,12 @@ services:
        - db-data:/var/lib/mysql/data
  
 
+
+  webweb:
+    image: ${DOCKER_REGISTRY-}webweb
+    build:
+      context: .
+      dockerfile: WebWeb/Dockerfile
 
 volumes:
   db-data:
